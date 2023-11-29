@@ -1,0 +1,68 @@
+body {
+  background-color: rgb(186, 190, 190);
+  color: aliceblue;
+  text-align: center;
+}
+
+.navBar {
+  display: flex;
+}
+
+h1 {
+  font-family: sans-serif;
+  font-size: 60px;
+}
+
+.navBarLinks {
+  margin-left: 30px;
+  font-size: 40px;
+}
+
+.headerP {
+  margin: 0px;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.logInput {
+  display: flex;
+  
+  justify-content: center;
+  justify-items: center;
+}
+
+.Input {
+  display: block;
+  margin: 2px;
+  width: 150px;
+  height: 40px;
+  border-radius: 7%;
+  border: 0.5px;
+  font-size: large;
+}
+
+.myInput {
+  width: 70px;
+  height: 40px;
+  border-radius: 7%;
+  border-radius: 7%;
+  border: 0.5px;
+}
+
+.todoContainer{
+  display: flex;
+  flex-direction: column;
+}
+.todoBox {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(128, 124, 124);
+  
+  width: 400px;
+  height: 45px;
+  border: 1px solid;
+}
+
+.checkBox{
+  size:px;
+}
