@@ -1,20 +1,67 @@
 body {
-  background-color: rgb(186, 190, 190);
-  color: aliceblue;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+h1 {
+  display: inline;
+}
+
+.h1Container {
+  position: relative;
+  font-family: sans-serif;
+  font-size: 40px;
+  margin-bottom: 250px;
+}
+
+h2 {
+  font-size: 40px;
 }
 
 .navBar {
   display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0px 0px 90px 0px;
+  width: 100vw;
+  height: 70px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-h1 {
-  font-family: sans-serif;
-  font-size: 60px;
+a:hover {
+  padding: 15px;
+  border-radius: 10%;
+  background-color: rgb(235, 236, 238);
+}
+
+.checkBox {
+  text-align: center;
+  width: 2.5rem;
+  width: 30px;
+  min-width: 30px;
+  height: 2.5rem;
+  height: 30px;
+  min-height: 30px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.socialMediaHeader {
+  position: absolute;
+  top: -250px;
+  left: 30px;
+}
+
+.userNameHeader {
+  position: absolute;
+  top: -250px;
+  right: 30px;
 }
 
 .navBarLinks {
-  margin-left: 30px;
+  text-decoration: none !important;
   font-size: 40px;
 }
 
@@ -26,7 +73,6 @@ h1 {
 
 .logInput {
   display: flex;
-  
   justify-content: center;
   justify-items: center;
 }
@@ -37,7 +83,8 @@ h1 {
   width: 150px;
   height: 40px;
   border-radius: 7%;
-  border: 0.5px;
+  border: 0.1px solid;
+  border-color: rgb(182, 183, 184);
   font-size: large;
 }
 
@@ -49,20 +96,53 @@ h1 {
   border: 0.5px;
 }
 
-.todoContainer{
+.todoContainer {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
 .todoBox {
   display: flex;
   justify-content: space-between;
-  background-color: rgb(128, 124, 124);
-  
-  width: 400px;
-  height: 45px;
+  align-items: center;
+  width: 700px;
+  height: 100px;
   border: 1px solid;
+  margin: 7px;
+  padding: 10px;
+  font-style: italic;
+  box-sizing: border-box;
 }
 
-.checkBox{
-  size:px;
+.updateContentClick {
+  width: 400px;
+  padding: 20px;
+  color: rgb(45, 58, 58);
+  font-size: x-large;
+  cursor: pointer;
+}
+
+.updateContentClick:hover {
+  color: rgb(240, 81, 89)
+}
+
+.deleteButton {
+  height: 90px;
+  border: none;
+}
+
+.theNewContent {
+  width: 200px;
+  height: 150px;
+  margin-left: 247px;
+}
+
+.updateTitleInput {
+  height: 50px;
+}
+
+.updateTitleSend {
+  height: 55px;
 }

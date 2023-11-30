@@ -8,8 +8,8 @@ const App = () => {
   const [isLog, setIslog] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
   const [existingUser, setExistingUser] = useState(false);
-  const FETCH_API = 'http://localhost:3500';
   const [user, setUser] = useState(null);
+  const FETCH_API = 'http://localhost:3500';
 
 
   const onSubmit = (data) => {
@@ -31,13 +31,15 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h1>M & M <p className="headerP">social media</p></h1>
-      <h1>{user?.name}</h1>
+    <div className="pageConntainer">
+      <div className="h1Container">
+      <h1 className="socialMediaHeader">M & M </h1>
+      <h1 className="userNameHeader">{user?.name}</h1>
+      </div>
       {isLog && (
-        <>
-        <AppTest />
-        </>
+        <nav>
+          <AppTest />
+        </nav>
       )}
       {!isLog && !isRegister && (
         <form className="logInput" onSubmit={handleSubmit(onSubmit)}>
