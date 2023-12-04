@@ -11,16 +11,13 @@ const Todos = ({ id }) => {
   const [todos, setTodos] = useState([]);
   const [editing, setEditing] = useState(null);
   const [newTodo, setNewTodo] = useState('');
-  const [searchOption, setSearchOption] = useState('title');
   const [displayOption, setDisplayOption] = useState('id');
 
   useEffect(() => {
     fetchTodos();
   }, [displayOption]);
 
-  const handleSearchPropertyChange = (property) => {
-    setSearchOption(property);
-  };
+  
 
   const handleDisplayOptionChange = (option) => {
     setDisplayOption(option);
@@ -135,25 +132,7 @@ const Todos = ({ id }) => {
     }
   };
 
-  const todoSearch = async (value) => {
-    let response = await fetch(`${API_URL}?userId=${id}`);
-    let data = await response.json();
-    let filteredData;
-
-    switch (searchOption) {
-      case 'id':
-        filteredData = data.filter((item) => item.id.toString().includes(value));
-        break;
-      case 'completed':
-        filteredData = data.filter((item) => !item.checked && item.title.toLowerCase().includes(value.toLowerCase())); break;
-      default:
-        filteredData = data.filter((item) =>
-          item.title.toLowerCase().includes(value.toLowerCase())
-        );
-        break;
-    }
-    setTodos(filteredData);
-  };
+ 
 
   return (
     <>
@@ -176,9 +155,9 @@ const Todos = ({ id }) => {
             handleDisplayOptionChange={handleDisplayOptionChange}
           />
           <SearchBy
-            handleSearchPropertyChange={handleSearchPropertyChange}
-            todoSearch={todoSearch}
-            searchOption={searchOption}
+          API_URL={API_URL}
+          setTodos={setTodos}
+            id={id}
           />
         </div>
         {todos.map((todo, index) => (

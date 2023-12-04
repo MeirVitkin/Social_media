@@ -1,6 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react';
 
-const SearchBy = ({handleSearchPropertyChange,todoSearch,searchOption}) => {
+
+const SearchBy = ({API_URL,id,setTodos}) => {
+  const [searchOption, setSearchOption] = useState('title');
+
+  const handleSearchPropertyChange = (property) => {
+    setSearchOption(property);
+  };
+
+  const todoSearch = async (value) => {
+    let response = await fetch(`${API_URL}?userId=${id}`);
+    let data = await response.json();
+    let filteredData;
+
+    switch (searchOption) {
+      case 'id':
+        filteredData = data.filter((item) => item.id.toString().includes(value));
+        break;
+      case 'completed':
+        filteredData = data.filter((item) => !item.checked && item.title.toLowerCase().includes(value.toLowerCase())); break;
+      default:
+        filteredData = data.filter((item) =>
+          item.title.toLowerCase().includes(value.toLowerCase())
+        );
+        break;
+    }
+    setTodos(filteredData);
+  };
   return (
     <>
         <div>
