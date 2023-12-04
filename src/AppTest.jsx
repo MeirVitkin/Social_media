@@ -5,7 +5,7 @@ import Todos from './component/Todos';
 import Albums from './component/Albums';
 import Photos from './component/Photos';
 
-const AppTest = () => {
+const AppTest = ({ id }) => {
   return (
     <div>
       <nav className='navBar'>
@@ -21,22 +21,22 @@ const AppTest = () => {
           <Link to='/Todos' style={{ textDecoration: 'none' }}>
             Todos</Link>
         </div>
-        <div className='navBarLinks'>
-           <Link to='/' style={{ textDecoration: 'none' }}>
-            Home</Link> </div>
+       
       </nav>
 
       <Routes>
         <Route path='/Photos/:albumId' element={<Photos />} />
         <Route path='/Albums' element={<Albums />} />
         <Route path='/Posts' element={<Posts />} />
-        <Route path='/Todos' element={<Todos />} />
+        <Route path='/Todos' element={<Todos id={id} />} />
       </Routes>
     </div>
   );
 }
 
 export default AppTest;
+
+
 // import React from 'react'
 // import { Link, Route, Routes, useParams } from 'react-router-dom';
 // import Posts from './component/Posts';

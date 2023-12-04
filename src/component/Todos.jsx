@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { FaTrashAlt } from 'react-icons/fa';
+import { FaTrashAlt, FaEdit } from 'react-icons/fa';
 import apiRequest from './apiRequest';
-import UpdateContent from './UpdateContent'
+import UpdateContent from './updateContent';
 import DisplayOptions from './DisplayOptions';
 import SearchBy from './SearchBy';
 
-const Todos = () => {
+const Todos = ({ id }) => {
   const API_URL = 'http://localhost:3500/todos';
 
   const [todos, setTodos] = useState([]);
@@ -13,6 +13,10 @@ const Todos = () => {
   const [newTodo, setNewTodo] = useState('');
   const [searchOption, setSearchOption] = useState('title');
   const [displayOption, setDisplayOption] = useState('id');
+
+  useEffect(() => {
+    fetchTodos();
+  }, [displayOption]);
 
   const handleSearchPropertyChange = (property) => {
     setSearchOption(property);
@@ -25,23 +29,12 @@ const Todos = () => {
   const handleAddTodo = async (e) => {
     e.preventDefault();
     if (newTodo.trim() !== '') {
-      // Find the maximum id in the current todos
-      const maxId = todos.length > 0 ? Math.max(...todos.map(todo => todo.id)) : 200;
-
-      // Create the new todo with an id one greater than the maximum
       const todoToAdd = {
-        id: maxId + 1,
+        userId: id,
         title: newTodo,
         checked: false,
       };
 
-      // Update the local state with the new todo
-      setTodos([...todos, todoToAdd]);
-
-      // Clear the input field after adding todo
-      setNewTodo('');
-
-      // Now, make the API request to add the todo to the server
       const addOptions = {
         method: 'POST',
         headers: {
@@ -49,24 +42,22 @@ const Todos = () => {
         },
         body: JSON.stringify(todoToAdd),
       };
-
       try {
         const response = await fetch(API_URL, addOptions);
         const data = await response.json();
-        // Handle the response if needed
+        setTodos([...todos, todoToAdd]);
+        setNewTodo('');
       } catch (error) {
         console.error('Error adding todo:', error);
       }
     }
+    fetchTodos();
   };
-
 
   const fetchTodos = async () => {
     try {
-      const response = await fetch(API_URL);
+      const response = await fetch(`${API_URL}?userId=${id}`);
       let data = await response.json();
-
-      // Sort todos based on displayOption
       switch (displayOption) {
         case 'id':
           data = data.sort((a, b) => a.id - b.id);
@@ -76,28 +67,21 @@ const Todos = () => {
           break;
         case 'completed':
           data = data.sort((a, b) => {
-            // Sort uncompleted first, then completed
             if (a.checked && !b.checked) return 1;
             if (!a.checked && b.checked) return -1;
             return 0;
           });
           break;
         default:
-          // Default to sorting by ID
           data = data.sort((a, b) => a.id - b.id);
           break;
       }
-
       setTodos(data);
     } catch (error) {
       console.error('Error fetching todos:', error);
     }
   };
 
-
-  useEffect(() => {
-    fetchTodos();
-  }, [displayOption]);
 
   const handleCheck = async (id) => {
     const listTodos = todos.map((todo) => todo.id === id ? { ...todo, checked: !todo.checked } : todo);
@@ -151,12 +135,8 @@ const Todos = () => {
     }
   };
 
-
-
-
-  // Modify the todoSearch function to use the selected search option
   const todoSearch = async (value) => {
-    let response = await fetch(API_URL);
+    let response = await fetch(`${API_URL}?userId=${id}`);
     let data = await response.json();
     let filteredData;
 
@@ -167,13 +147,11 @@ const Todos = () => {
       case 'completed':
         filteredData = data.filter((item) => !item.checked && item.title.toLowerCase().includes(value.toLowerCase())); break;
       default:
-        // Default to searching by title
         filteredData = data.filter((item) =>
           item.title.toLowerCase().includes(value.toLowerCase())
         );
         break;
     }
-
     setTodos(filteredData);
   };
 
@@ -184,22 +162,25 @@ const Todos = () => {
 
         <form onSubmit={handleAddTodo}>
           <input
+            className='addTodo'
             type="text"
             value={newTodo}
             onChange={(e) => setNewTodo(e.target.value)}
             placeholder='Add todo...'
           />
-          <button type="submit">Add Todo</button>
+          <button className='addTodoSubmit' type="submit">Add Todo</button>
         </form>
-        <DisplayOptions
-          displayOption={displayOption}
-          handleDisplayOptionChange={handleDisplayOptionChange}
-        />
-        <SearchBy
-          handleSearchPropertyChange={handleSearchPropertyChange}
-          todoSearch={todoSearch}
-          searchOption={searchOption}
-        />
+        <div className='filtering'>
+          <DisplayOptions
+            displayOption={displayOption}
+            handleDisplayOptionChange={handleDisplayOptionChange}
+          />
+          <SearchBy
+            handleSearchPropertyChange={handleSearchPropertyChange}
+            todoSearch={todoSearch}
+            searchOption={searchOption}
+          />
+        </div>
         {todos.map((todo, index) => (
           <div className='todoBox' key={index}>
             <input
@@ -217,17 +198,27 @@ const Todos = () => {
             ) : (
               <div
                 className='updateContentClick'
-                onDoubleClick={() => handleUpdate(todo)}
+              //onClick={() => handleCheck(todo.id)}
               >
                 <div style={(todo.checked) ? { textDecoration: 'line-through' } : null}>{todo.title}</div>
               </div>
             )}
-            <FaTrashAlt
-              onClick={() => handleDelete(todo.id)}
-              role="button"
-              tabIndex="0"
-              aria-label={`Delete`}
-            />
+            <div className='todosIcons'>
+              <FaEdit
+                className='editIcon'
+                onClick={() => handleUpdate(todo)}
+                role="button"
+                tabIndex="0"
+                aria-label={`Edit`}
+              />
+              <FaTrashAlt
+                className='trashIcon'
+                onClick={() => handleDelete(todo.id)}
+                role="button"
+                tabIndex="0"
+                aria-label={`Delete`}
+              />
+            </div>
           </div>
         ))}
       </div>
