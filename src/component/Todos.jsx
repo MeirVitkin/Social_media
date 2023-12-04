@@ -4,52 +4,19 @@ import apiRequest from './apiRequest';
 import UpdateContent from './updateContent';
 import DisplayOptions from './DisplayOptions';
 import SearchBy from './SearchBy';
+import AddContent from './AddContent';
 
 const Todos = ({ id }) => {
   const API_URL = 'http://localhost:3500/todos';
 
   const [todos, setTodos] = useState([]);
   const [editing, setEditing] = useState(null);
-  const [newTodo, setNewTodo] = useState('');
   const [displayOption, setDisplayOption] = useState('id');
 
   useEffect(() => {
     fetchTodos();
   }, [displayOption]);
 
-  
-
-  const handleDisplayOptionChange = (option) => {
-    setDisplayOption(option);
-  };
-
-  const handleAddTodo = async (e) => {
-    e.preventDefault();
-    if (newTodo.trim() !== '') {
-      const todoToAdd = {
-        userId: id,
-        title: newTodo,
-        checked: false,
-      };
-
-      const addOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(todoToAdd),
-      };
-      try {
-        const response = await fetch(API_URL, addOptions);
-        const data = await response.json();
-        setTodos([...todos, todoToAdd]);
-        setNewTodo('');
-      } catch (error) {
-        console.error('Error adding todo:', error);
-      }
-    }
-    fetchTodos();
-  };
 
   const fetchTodos = async () => {
     try {
@@ -138,21 +105,17 @@ const Todos = ({ id }) => {
     <>
       <div className='todoContainer'>
         <h2>Todos</h2>
-
-        <form onSubmit={handleAddTodo}>
-          <input
-            className='addTodo'
-            type="text"
-            value={newTodo}
-            onChange={(e) => setNewTodo(e.target.value)}
-            placeholder='Add todo...'
-          />
-          <button className='addTodoSubmit' type="submit">Add Todo</button>
-        </form>
+        <AddContent
+        id={id}
+        todos={todos}
+        setTodos={setTodos}
+        API_URL={API_URL}
+        fetchTodos={fetchTodos}
+        />
         <div className='filtering'>
           <DisplayOptions
             displayOption={displayOption}
-            handleDisplayOptionChange={handleDisplayOptionChange}
+            setDisplayOption={setDisplayOption}
           />
           <SearchBy
           API_URL={API_URL}
@@ -177,7 +140,6 @@ const Todos = ({ id }) => {
             ) : (
               <div
                 className='updateContentClick'
-              //onClick={() => handleCheck(todo.id)}
               >
                 <div style={(todo.checked) ? { textDecoration: 'line-through' } : null}>{todo.title}</div>
               </div>

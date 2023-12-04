@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const Albums = () => {
-  const API_URL = 'http://localhost:3500/albums';
+const Albums = ({id}) => {
+  const API_URL = `http://localhost:3500/albums?userId=${id}`;
 
   const [albums, setAlbums] = useState([]);
 

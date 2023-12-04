@@ -1,6 +1,12 @@
 import React from 'react'
 
-const DisplayOmtions = ({displayOption,handleDisplayOptionChange}) => {
+const DisplayOmtions = ({displayOption,setDisplayOption}) => {
+  
+
+  const handleDisplayOptionChange = (option) => {
+    setDisplayOption(option);
+  };
+
   return (
     <div>
         Display By:
@@ -8,7 +14,7 @@ const DisplayOmtions = ({displayOption,handleDisplayOptionChange}) => {
         onChange={(e) => handleDisplayOptionChange(e.target.value)}>
         <option value="id">ID</option>
         <option value="title">Title</option>
-        <option value="completed">Completed</option>
+        <option value="completed">chaced</option>
         </select>
   </div>
 
