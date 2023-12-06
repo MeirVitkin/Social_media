@@ -32,7 +32,7 @@ const AddContent = ({API_URL,id,todos,setTodos,fetchTodos}) => {
         fetchTodos();
       };
   return (
-    <form onSubmit={handleAddTodo}>
+    <form className='addTodoForm' onSubmit={handleAddTodo}>
           <input
             className='addTodo'
             type="text"

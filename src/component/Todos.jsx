@@ -105,6 +105,17 @@ const Todos = ({ id }) => {
     <>
       <div className='todoContainer'>
         <h2>Todos</h2>
+        <div className='filtering'>
+          <SearchBy
+          API_URL={API_URL}
+          setTodos={setTodos}
+            id={id}
+          />
+          <DisplayOptions
+            displayOption={displayOption}
+            setDisplayOption={setDisplayOption}
+          />
+        </div>
         <AddContent
         id={id}
         todos={todos}
@@ -112,17 +123,6 @@ const Todos = ({ id }) => {
         API_URL={API_URL}
         fetchTodos={fetchTodos}
         />
-        <div className='filtering'>
-          <DisplayOptions
-            displayOption={displayOption}
-            setDisplayOption={setDisplayOption}
-          />
-          <SearchBy
-          API_URL={API_URL}
-          setTodos={setTodos}
-            id={id}
-          />
-        </div>
         {todos.map((todo, index) => (
           <div className='todoBox' key={index}>
             <input

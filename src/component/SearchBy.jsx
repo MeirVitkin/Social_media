@@ -29,7 +29,7 @@ const SearchBy = ({API_URL,id,setTodos}) => {
   };
   return (
     <>
-        <div>
+        <div className='searchBy'>
             Search By:
             <br />
             <label>

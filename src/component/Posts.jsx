@@ -35,7 +35,7 @@ const Posts = () => {
           </div>
           {expandedPostId === post.id && (
             <div className='postBody'>
-              <p>{post.body}</p>
+              <span>{post.body}</span>
             </div>
           )}
         </div>

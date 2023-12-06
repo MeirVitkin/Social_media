@@ -40,10 +40,10 @@ const Login = ({setUser,setIslog,isLog}) => {
       };
   return (
     <form className="logInput" onSubmit={handleSubmit(onSubmit)}>
-          {error && <p className="error">{error}</p>}
           <input className="Input" type="text" placeholder="User name.." {...register("UserName")} />
           <input className="Input" type="text" placeholder="password.." {...register("password")} />
           <input className="myInput" type="submit" />
+          {error && <p className="error">{error}</p>}
         </form>
   )
 }

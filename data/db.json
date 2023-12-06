@@ -39641,43 +39641,49 @@
       "id": 8,
       "title": "quo adipisci enim quam ut ab",
       "completed": true,
-      "checked": false
+      "checked": true
     },
     {
       "userId": 1,
       "id": 10,
       "title": "david ha'melech",
-      "completed": true
+      "completed": true,
+      "checked": true
     },
     {
       "userId": 1,
       "id": 11,
       "title": "vero rerum temporibus dolor",
-      "completed": true
+      "completed": true,
+      "checked": true
     },
     {
       "userId": 1,
       "id": 12,
       "title": "ipsa repellendus fugit nisi",
-      "completed": true
+      "completed": true,
+      "checked": false
     },
     {
       "userId": 1,
       "id": 13,
       "title": "et doloremque nulla",
-      "completed": false
+      "completed": false,
+      "checked": true
     },
     {
       "userId": 1,
       "id": 14,
       "title": "repellendus sunt dolores architecto voluptatum",
-      "completed": true
+      "completed": true,
+      "checked": true
     },
     {
       "userId": 1,
       "id": 15,
       "title": "ab voluptatum amet voluptas",
-      "completed": true
+      "completed": true,
+      "checked": true
     },
     {
       "userId": 1,
@@ -40832,12 +40838,6 @@
       "title": "kugh7",
       "checked": true,
       "id": 207
-    },
-    {
-      "userId": 1,
-      "title": "far away",
-      "checked": true,
-      "id": 208
     }
   ],
   "users": [

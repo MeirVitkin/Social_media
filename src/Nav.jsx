@@ -10,11 +10,11 @@ const Nav = ({ id }) => {
   return (
     <div>
       <nav className='navBar'>
-          <Link to='/Posts' className='navBarLinks' style={{ textDecoration: 'none' }}>
+          <Link to='/Posts' className='navBarLinks'>
             Posts</Link>
-          <Link to='/Albums' className='navBarLinks' style={{ textDecoration: 'none' }}>
+          <Link to='/Albums' className='navBarLinks'>
             Albums</Link>
-          <Link to='/Todos' className='navBarLinks' style={{ textDecoration: 'none' }}>
+          <Link to='/Todos' className='navBarLinks'>
             Todos</Link>
        
       </nav>

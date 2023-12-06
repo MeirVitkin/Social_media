@@ -27,7 +27,7 @@ const Albums = ({id}) => {
         <div key={album.id} className='album'>
           <Link className='linkToPhotos' to={`/photos/${album.id}`}>
             <h3>#{album.id}</h3>
-            <div>{album.title}</div>
+            <div className='albumTitle'>{album.title}</div>
           </Link>
         </div>
       ))}

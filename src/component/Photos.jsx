@@ -37,7 +37,7 @@ const Photos = () => {
         {photos.slice(0, visiblePhotos).map((photo) => (
           <div key={photo.id} className='photo'>
             <img src={photo.thumbnailUrl} alt={photo.title} />
-            <p>{photo.title}</p>
+            <footer>{photo.title}</footer>
           </div>
         ))}
       </div>

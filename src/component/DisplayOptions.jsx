@@ -8,13 +8,13 @@ const DisplayOmtions = ({displayOption,setDisplayOption}) => {
   };
 
   return (
-    <div>
+    <div className='displayBy'>
         Display By:
         <select value={displayOption} 
         onChange={(e) => handleDisplayOptionChange(e.target.value)}>
         <option value="id">ID</option>
         <option value="title">Title</option>
-        <option value="completed">chaced</option>
+        <option value="completed">chacked</option>
         </select>
   </div>
 
